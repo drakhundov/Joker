@@ -1,0 +1,26 @@
+.about {
+  display: flex;
+  height: 50vh;
+  // width: 50%;
+  margin: auto;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 12.5%;
+  .name-container {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    #name {
+      font-size: 9rem;
+      font-weight: 400;
+    }
+    #surname {
+      font-size: 4rem;
+      font-weight: 300;
+    }
+  }
+  .desc {
+    display: flex;
+    justify-content: start;
+  }
+}

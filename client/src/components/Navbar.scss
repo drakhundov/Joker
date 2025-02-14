@@ -1,0 +1,26 @@
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  margin-top: 10px;
+  width: 100vw;
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    padding: 5px 15px;
+    width: fit-content;
+    list-style: none;
+    .nav-elem {
+      margin: 0 2rem;
+      a {
+        text-decoration: none;
+        color: inherit;
+        &.active {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
