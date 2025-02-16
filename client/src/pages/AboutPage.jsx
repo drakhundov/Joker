@@ -9,28 +9,14 @@ const AboutPage = () => {
         </span>
         <span id="surname">Ahundzade</span>
       </div>
-      <span
-        id="desc"
-        style={{
-          fontWeight: "300",
-          fontSize: "4rem",
-          letterSpacing: "20px",
-          alignSelf: "center",
-        }}
-      >
-        İletişim için
-      </span>
       <div className="desc">
-        <h2 className="contact-info">
-          <ul>
-            <li>
-              <a href="github.com">GitHub</a>
-              <a href="linkedin.com">LinkedIn</a>
-            </li>
-          </ul>
-        </h2>
+        <a href="https://github.com/drakhundov">
+          <img className="link-icon" src="icons/github-icon.svg" />
+        </a>
+        <a href="https://www.linkedin.com/in/abdul-akhundzadeh/">
+          <img className="link-icon" src="icons/linkedin-icon.svg" />
+        </a>
       </div>
-      {/* TODO: Add links to GH and LinkedIn*/}
     </div>
   );
 };

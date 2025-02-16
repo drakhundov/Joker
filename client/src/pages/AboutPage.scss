@@ -4,8 +4,10 @@
   // width: 50%;
   margin: auto;
   flex-direction: column;
-  justify-content: space-between;
-  margin-top: 12.5%;
+  // justify-content: space-between;
+  align-items: center;
+  margin-top: 15%;
+  gap: 15px;
   .name-container {
     display: flex;
     justify-content: center;
@@ -21,6 +23,14 @@
   }
   .desc {
     display: flex;
-    justify-content: start;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 110px;
+    .link-icon {
+      width: 50px;
+      &[src="icons/github-icon.svg"] {
+        width: 80%;
+      }
+    }
   }
 }

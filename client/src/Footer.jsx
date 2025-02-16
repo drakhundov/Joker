@@ -4,7 +4,7 @@ import "./Footer.scss";
 const Footer = () => {
   return (
     <React.Fragment>
-      <div className="copyright">Abdül Ahundzade (C), 2024</div>
+      <div className="copyright">Made with love in the windy city of Baku.</div>
     </React.Fragment>
   );
 };
