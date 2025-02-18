@@ -1,35 +1,39 @@
 .about {
   display: flex;
-  height: 50vh;
-  // width: 50%;
+  width: fit-content;
   margin: auto;
   flex-direction: column;
-  // justify-content: space-between;
-  align-items: center;
+  align-items: end;
   margin-top: 15%;
-  gap: 15px;
   .name-container {
     display: flex;
     justify-content: center;
     align-items: baseline;
     #name {
-      font-size: 9rem;
+      font-size: 8rem;
       font-weight: 400;
     }
     #surname {
-      font-size: 4rem;
+      font-size: 3rem;
       font-weight: 300;
     }
   }
   .desc {
+    font-size: 1.5rem;
+    font-weight: 300;
+    #itu {
+      color: #DAA520;
+    }
+  }
+  .links {
+    margin-top: 15px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 110px;
+    width: fit-content;
+    gap: 7px;
     .link-icon {
-      width: 50px;
+      width: 30px;
       &[src="icons/github-icon.svg"] {
-        width: 80%;
+        width: 28px;
       }
     }
   }

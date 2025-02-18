@@ -9,7 +9,8 @@ const AboutPage = () => {
         </span>
         <span id="surname">Ahundzade</span>
       </div>
-      <div className="desc">
+      <div className="desc"><span id="itu">İTÜ</span> Bilgisayar Mühendisliği</div>
+      <div className="links">
         <a href="https://github.com/drakhundov">
           <img className="link-icon" src="icons/github-icon.svg" />
         </a>
