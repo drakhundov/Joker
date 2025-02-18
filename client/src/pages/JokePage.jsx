@@ -3,10 +3,12 @@ import "./JokePage.scss";
 
 const JokePage = () => {
   const [joke, setJoke] = useState(null);
+  const [showWarning, setShowWarning] = useState(false);
   const [jokeTypes, setJokeTypes] = useState({
     dark: false,
+    programming: false,
+    spooky: false,
   });
-  const jokeTypeSelectorRef = useRef(null);
   const handleJokeTypesChange = (e) => {
     const { name, checked } = e.target;
     setJokeTypes((prevTypes) => ({
@@ -14,85 +16,100 @@ const JokePage = () => {
       [name]: checked,
     }));
   };
-  const handleForm = async (e) => {
+  const fetchJokeFromServer = async (e) => {
     e.preventDefault();
     const selectedTypes = Object.keys(jokeTypes).filter(
       (type) => jokeTypes[type]
     );
-    const APIURL = `http://localhost:4040/getJoke?${selectedTypes.join("&")}`;
-    console.log(`[LOG] Fetching from ${APIURL}`);
-    const response = await fetch(APIURL);
+    if (selectedTypes.length == 0) {
+      setShowWarning(true);
+    } else {
+      setShowWarning(false);
+    }
+    const URL = `http://localhost:4040/getJoke?${selectedTypes.join("&")}`;
+    console.log(`[LOG] Fetching from ${URL}`);
+    const response = await fetch(URL);
     const data = await response.json();
     setJoke(data);
   };
-  const jokeTypeSelectorDisplay = (flag) => {
-    if (flag) {
-      jokeTypeSelectorRef.current.style.display = "block";
-    } else {
-      jokeTypeSelectorRef.current.style.display = "none";
-    }
+  const jokeTypeSelector = useRef(null);
+  const toggleJokeTypeSelector = (flag) => {
+    jokeTypeSelector.current.style.visibility = flag ? "visible" : "hidden";
+    setShowWarning(false);
   };
   return (
-    <>
-      <form onSubmit={handleForm}>
-        <label>
-          <input
-            name="general-type"
-            type="radio"
-            defaultChecked
-            onChange={(e) => {
-              e.preventDefault();
-              jokeTypeSelectorDisplay(false);
-            }}
-          />
-          Any
-        </label>
-        <label>
-          <input
-            name="general-type"
-            type="radio"
-            onChange={(e) => {
-              e.preventDefault();
-              jokeTypeSelectorDisplay(true);
-            }}
-          />
-          Custom
-        </label>
-        <div ref={jokeTypeSelectorRef} style={{ display: "none" }}>
-          <label>
-            <input
-              onChange={handleJokeTypesChange}
-              name="Dark"
-              type="checkbox"
-            />
-            Dark
-          </label>
-          <label>
-            <input
-              onChange={handleJokeTypesChange}
-              name="Programming"
-              type="checkbox"
-            />
-            Programming
-          </label>
-          <label>
-            <input
-              onChange={handleJokeTypesChange}
-              name="Spooky"
-              type="checkbox"
-            />
-            Spooky
-          </label>
-        </div>
-        <button type="submit">Get A Joke!</button>
-      </form>
-      {joke && (
-        <div className="joke">
-          <div className="joke-setup">{joke.setup}</div>
-          <div className="joke-punchline">{joke.punchline}</div>
-        </div>
-      )}
-    </>
+    <div className="centering-container">
+      <div className="content-container">
+        <form className="joke-selector" onSubmit={fetchJokeFromServer}>
+          <div>
+            <label>
+              <input
+                name="general-type"
+                type="radio"
+                defaultChecked
+                onChange={() => toggleJokeTypeSelector(false)}
+                className="type-selection"
+              />
+              Any
+            </label>
+            <label>
+              <input
+                name="general-type"
+                type="radio"
+                onChange={() => toggleJokeTypeSelector(true)}
+                className="type-selection"
+              />
+              Custom
+            </label>
+            <button className="submit-btn" type="submit">
+              Get A Joke!
+            </button>
+          </div>
+          <div ref={jokeTypeSelector} style={{ visibility: "hidden" }}>
+            <label>
+              <input
+                name="Dark"
+                type="checkbox"
+                onChange={handleJokeTypesChange}
+                className="type-selection"
+              />
+              Dark
+            </label>
+            <label>
+              <input
+                name="Programming"
+                type="checkbox"
+                onChange={handleJokeTypesChange}
+                className="type-selection"
+              />
+              Programming
+            </label>
+            <label>
+              <input
+                name="Spooky"
+                type="checkbox"
+                onChange={handleJokeTypesChange}
+                className="type-selection"
+              />
+              Spooky
+            </label>
+          </div>
+        </form>
+        {joke && (
+          <div className="fetched-joke">
+            <div className="joke-setup">{joke.setup}</div>
+            {joke.punchline && (
+              <div className="joke-punchline">{joke.punchline}</div>
+            )}
+          </div>
+        )}
+        {showWarning && (
+          <p className="warning-msg">
+            First, you need to choose some filters or apply &apos;Any&apos;.
+          </p>
+        )}
+      </div>
+    </div>
   );
 };
 
