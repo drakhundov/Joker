@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import "./JokePage.scss";
 
+// TODO: add cache to avoid repetitive jokes.
+
 const JokePage = () => {
   const [joke, setJoke] = useState(null);
   const [showWarning, setShowWarning] = useState(false);
