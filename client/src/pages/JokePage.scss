@@ -7,7 +7,7 @@
     /* Used to center the form. */
     display: flex;
     flex-direction: column;
-    height: 30vh;
+    height: 40vh;
     align-items: center;
     gap: 30px;
     .joke-selector {
@@ -16,7 +16,6 @@
       gap: 10px;
       input.type-selection {
         &[type="radio"] {
-          display: none;
           width: 20px;
           height: 20px;
           border: 2px solid #3498db;
@@ -27,7 +26,6 @@
           vertical-align: middle;
           transition: all 0.3s ease;
         }
-
         &[type="checkbox"] {
           width: 20px;
           height: 20px;
@@ -36,20 +34,24 @@
           position: relative;
           margin-right: 8px;
           vertical-align: middle;
-          transition: all 0.3s ease;
         }
       }
+      .radio-group {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
       .submit-btn {
-        width: fit-content;
-        height: fit-content;
-        border: 1px solid black;
-        background-color: #018dea;
-        margin: 10px;
-        padding: 3px;
-        &:hover {
-          background-color: #5ab5f2;
-          cursor: pointer;
-        }
+        font-size: 14px;
+        padding: 7px 12px;
+        color: #ffffff;
+        background: linear-gradient(to bottom, #4a4a4a, #1c1c1c);
+        border-radius: 12px;
+        border: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
       }
     }
     .fetched-joke {
@@ -59,4 +61,15 @@
       color: rgb(223, 52, 37);
     }
   }
+}
+
+.row-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.column-container {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
 }

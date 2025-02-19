@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import "./JokePage.scss";
 
 // TODO: add cache to avoid repetitive jokes.
@@ -42,32 +42,55 @@ const JokePage = () => {
   return (
     <div className="centering-container">
       <div className="content-container">
+        <div className="fetched-joke" style={{ minHeight: "50px" }}>
+          {joke && (
+            <React.Fragment>
+              <div className="joke-setup">{joke.setup}</div>
+              {joke.punchline && (
+                <div className="joke-punchline">{joke.punchline}</div>
+              )}
+            </React.Fragment>
+          )}
+        </div>
+        <p className="warning-msg" style={{ minHeight: "25px" }}>
+          {showWarning && (
+            <span>
+              First, you need to choose some filters or apply &apos;Any&apos;.
+            </span>
+          )}
+        </p>
         <form className="joke-selector" onSubmit={fetchJokeFromServer}>
-          <div>
-            <label>
-              <input
-                name="general-type"
-                type="radio"
-                defaultChecked
-                onChange={() => toggleJokeTypeSelector(false)}
-                className="type-selection"
-              />
-              Any
-            </label>
-            <label>
-              <input
-                name="general-type"
-                type="radio"
-                onChange={() => toggleJokeTypeSelector(true)}
-                className="type-selection"
-              />
-              Custom
-            </label>
+          <div className="row-container" style={{ gap: "3vw" }}>
+            <div className="radio-group">
+              <label>
+                <input
+                  name="general-type"
+                  type="radio"
+                  defaultChecked
+                  onChange={() => toggleJokeTypeSelector(false)}
+                  className="type-selection"
+                />
+                Any
+              </label>
+              <label>
+                <input
+                  name="general-type"
+                  type="radio"
+                  onChange={() => toggleJokeTypeSelector(true)}
+                  className="type-selection"
+                />
+                Custom
+              </label>
+            </div>
             <button className="submit-btn" type="submit">
               Get A Joke!
             </button>
           </div>
-          <div ref={jokeTypeSelector} style={{ visibility: "hidden" }}>
+          <div
+            ref={jokeTypeSelector}
+            style={{ visibility: "hidden" }}
+            className="column-container"
+          >
             <label>
               <input
                 name="Dark"
@@ -97,19 +120,6 @@ const JokePage = () => {
             </label>
           </div>
         </form>
-        {joke && (
-          <div className="fetched-joke">
-            <div className="joke-setup">{joke.setup}</div>
-            {joke.punchline && (
-              <div className="joke-punchline">{joke.punchline}</div>
-            )}
-          </div>
-        )}
-        {showWarning && (
-          <p className="warning-msg">
-            First, you need to choose some filters or apply &apos;Any&apos;.
-          </p>
-        )}
       </div>
     </div>
   );
